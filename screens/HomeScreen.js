@@ -5,8 +5,14 @@ import {
   View,
   TextInput,
   ScrollView,
+  RefreshControl,
 } from 'react-native';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import {
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useCallback,
+} from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
   ChevronDownIcon,
@@ -28,25 +34,32 @@ const HomeScreen = () => {
     });
   }, []);
 
-  useEffect(() => {
+  const fetchData = useCallback(() => {
     client
       .fetch(
         `
-      *[_type == "featured"] {
+    *[_type == "featured"] {
+      ...,
+      restourant[]->{
         ...,
-        restourant[]->{
-          ...,
-          dishes[]->,
-          type->{
-            name
-          }
+        dishes[]->,
+        type->{
+          name
         }
       }
-      `
+    }`
       )
       .then((data) => {
         setFeatured(data);
       });
+  }, []);
+
+  const onRefresh = useCallback(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   return (
@@ -84,6 +97,9 @@ const HomeScreen = () => {
         contentContainerStyle={{
           paddingBottom: 100,
         }}
+        refreshControl={
+          <RefreshControl refreshing={!featured.length} onRefresh={onRefresh} />
+        }
         className='bg-gray-100 flex-1'
       >
         <Categories />

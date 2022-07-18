@@ -17,13 +17,12 @@ const PreparingOrderScreen = () => {
   return (
     <SafeAreaView className='bg-[#00ccbb] flex-1 justify-center items-center'>
       <Animate.Image
-        source={require('../assets/delivery.svg')}
+        source={require('../assets/delivery.png')}
         animation='slideInUp'
         iterationCount={1}
-        className='h-40 w-96'
+        className='h-96 w-96'
       />
       <Animate.Text
-        source={require('../assets/delivery.svg')}
         animation='slideInUp'
         iterationCount={1}
         className='text-lg my-10 text-white font-bold text-center'
