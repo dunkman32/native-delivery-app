@@ -11,11 +11,10 @@ import {
 import { XIcon } from 'react-native-heroicons/solid';
 import MapView, { Marker } from 'react-native-maps';
 import * as Progress from 'react-native-progress';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectRestourant } from '../features/restourantSlice';
 
 const DeliveryScreen = () => {
-  const dispatch = useDispatch();
   const navigation = useNavigation();
   const restourant = useSelector(selectRestourant);
 

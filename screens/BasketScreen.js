@@ -1,26 +1,22 @@
+import { useNavigation } from '@react-navigation/native'
+import React, { useEffect, useState } from 'react'
+import Currency from 'react-currency-formatter'
 import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
-import React, { useEffect, useMemo, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectRestourant } from '../features/restourantSlice';
+  Image, SafeAreaView, Text, TouchableOpacity, View
+} from 'react-native'
+import { FlatList } from 'react-native-gesture-handler'
+import { XCircleIcon } from 'react-native-heroicons/solid'
+import { useSelector } from 'react-redux'
+import BasketItem from '../components/BasketItem'
 import {
-  removeFromBasket,
   selectBasketItems,
-  selectBasketTotal,
-} from '../features/basketSlice';
-import { XCircleIcon } from 'react-native-heroicons/solid';
-import { urlFor } from '../sanity';
-import Currency from 'react-currency-formatter';
+  selectBasketTotal
+} from '../features/basketSlice'
+import { selectRestourant } from '../features/restourantSlice'
+
+
 
 const BasketScreen = () => {
-  const dispatch = useDispatch();
   const navigation = useNavigation();
   const items = useSelector(selectBasketItems);
   const restourant = useSelector(selectRestourant);
@@ -66,39 +62,16 @@ const BasketScreen = () => {
             <Text className='text-[#00ccbb]'>Change</Text>
           </TouchableOpacity>
         </View>
-        <ScrollView className='divide-y divide-gray-200'>
-          {Object.entries(groupedItems).map(([key, items]) => {
-            const item = items[0];
-            return (
-              <View
-                className='flex-row items-center space-x-3 bg-white px-5 py-2'
-                key={key}
-              >
-                <Text className='text-[#00ccbb]'>{items.length} x</Text>
-                <Image
-                  className='h-12 w-12 rounded-full'
-                  source={{
-                    uri: urlFor(item?.image).url(),
-                  }}
-                />
-                <Text className='flex-1'>{item?.name}</Text>
-                <Text className={'bg-gray-400'}>
-                  <Currency
-                    quantity={item?.price * items.length}
-                    currency='GBP'
-                  />
-                </Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    dispatch(removeFromBasket(key));
-                  }}
-                >
-                  <Text className='text-[#00ccbb]'>Remove</Text>
-                </TouchableOpacity>
-              </View>
-            );
-          })}
-        </ScrollView>
+
+        <FlatList
+          data={Object.entries(groupedItems)}
+          renderItem={(it) => {
+            console.log(it)
+            const item = it.item[1][0];
+            return <BasketItem item={item} items={it.item[1]} id={it.item[0]} />
+          }}
+          keyExtractor={(it) => it[0]}
+         />
 
         <View className='mt-5 space-y-4 bg-white p-5'>
           <View className='flex-row justify-between'>

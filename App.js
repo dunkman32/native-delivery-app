@@ -7,10 +7,10 @@ import RestourantScreen from './screens/RestourantScreen';
 import BasketScreen from './screens/BasketScreen';
 import DeliveryScreen from './screens/DeliveryScreen';
 import PreparingOrderScreen from './screens/PreparingOrderScreen';
-import PickImage from './screens/PickImage';
+import PickImage from './screens/examples/PickImage';
 import Menu from './screens/MenuScreen';
-import Camera from './screens/Camera';
-import SwipableScreen from './screens/SwipableScreen';
+import Camera from './screens/examples/Camera';
+import SwipableScreen from './screens/examples/SwipableScreen';
 import { store } from './store';
 
 const Stack = createNativeStackNavigator();
