@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Pressable, Image } from 'react-native';
 import React, { useState } from 'react';
 import Currency from 'react-currency-formatter';
 import { urlFor } from '../sanity';
@@ -29,7 +29,7 @@ const DishRow = ({ id, name, description, price, image }) => {
 
   return (
     <>
-      <TouchableOpacity
+      <Pressable
         onPress={() => setIsPressed(!isPressed)}
         className={`bg-white border border-gray-200 p-4 ${
           isPressed && 'border-b-0'
@@ -56,11 +56,11 @@ const DishRow = ({ id, name, description, price, image }) => {
             />
           </View>
         </View>
-      </TouchableOpacity>
+      </Pressable>
       {isPressed && (
         <View className='bg-white px-4'>
           <View className='flex-row items-center space-x-2 pb-3'>
-            <TouchableOpacity
+            <Pressable
               disabled={!items.length}
               onPress={removeItemFromBasket}
             >
@@ -68,14 +68,14 @@ const DishRow = ({ id, name, description, price, image }) => {
                 color={items.length > 0 ? '#00ccbb' : 'gray'}
                 size={40}
               />
-            </TouchableOpacity>
+            </Pressable>
             <Text>{items.length}</Text>
-            <TouchableOpacity onPress={addItemToBasket}>
+            <Pressable onPress={addItemToBasket}>
               <PlusCircleIcon
                 color={items.length > 0 ? '#00ccbb' : 'gray'}
                 size={40}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       )}

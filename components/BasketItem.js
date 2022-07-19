@@ -1,10 +1,14 @@
-import React from 'react';
-import Currency from 'react-currency-formatter';
-import { Image, Text, TouchableOpacity, View, Animated } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { removeFromBasket } from '../features/basketSlice';
-import { urlFor } from '../sanity';
-import { Swipeable } from 'react-native-gesture-handler';
+import React, { useRef } from 'react'
+import Currency from 'react-currency-formatter'
+import { Animated, Image, Pressable, Text, Vibration, View } from 'react-native'
+import {
+  Swipeable
+} from 'react-native-gesture-handler'
+import { useDispatch } from 'react-redux'
+import { removeFromBasket } from '../features/basketSlice'
+import { urlFor } from '../sanity'
+import { TrashIcon } from 'react-native-heroicons/solid';
+
 
 const RightActions = ({ progress, dragX, onPress }) => {
   const scale = dragX.interpolate({
@@ -13,26 +17,30 @@ const RightActions = ({ progress, dragX, onPress }) => {
     extrapolate: 'clamp',
   });
   return (
-    <TouchableOpacity
-      className='h-full justify-center'
-      onPress={onPress}
-    >
+    <Pressable className='h-full justify-center' onPress={onPress}>
       <View className='bg-[red] justify-center items-end'>
-        <Animated.Text
+        <Animated.View
           style={{ transform: [{ scale }] }}
-          className='text-white p-7'
+          className='p-7'
         >
-          Remove
-        </Animated.Text>
+          <TrashIcon size={32} color='white'/>
+        </Animated.View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
 const BasketItem = ({ items, item, id }) => {
   const dispatch = useDispatch();
+  const ref = useRef(null);
+  const onLongPress = () => {
+    Vibration.vibrate()
+    ref.current.openRight()
+  }
+
   return (
     <Swipeable
+      ref={ref}
       renderRightActions={(progress, dragX) => (
         <RightActions
           progress={progress}
@@ -43,19 +51,21 @@ const BasketItem = ({ items, item, id }) => {
         />
       )}
     >
-      <View className='flex-row items-center space-x-3 bg-white px-5 py-2'>
-        <Text className='text-[#00ccbb]'>{items.length} x</Text>
-        <Image
-          className='h-12 w-12 rounded-full'
-          source={{
-            uri: urlFor(item?.image).url(),
-          }}
-        />
-        <Text className='flex-1'>{item?.name}</Text>
-        <Text>
-          <Currency quantity={item?.price * items.length} currency='GBP' />
-        </Text>
-      </View>
+      <Pressable onLongPress={onLongPress}>
+        <View className='flex-row items-center space-x-3 bg-white px-5 py-2'>
+          <Text className='text-[#00ccbb]'>{items.length} x</Text>
+          <Image
+            className='h-12 w-12 rounded-full'
+            source={{
+              uri: urlFor(item?.image).url(),
+            }}
+          />
+          <Text className='flex-1'>{item?.name}</Text>
+          <Text>
+            <Currency quantity={item?.price * items.length} currency='GBP' />
+          </Text>
+        </View>
+      </Pressable>
     </Swipeable>
   );
 };

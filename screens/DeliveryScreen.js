@@ -4,7 +4,7 @@ import {
   Image,
   SafeAreaView,
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
   Platform,
 } from 'react-native';
@@ -22,9 +22,9 @@ const DeliveryScreen = () => {
     <View className='bg-[#00ccbb] flex-1'>
       <SafeAreaView className='z-40'>
         <View className='flex-row justify-between items-center p-5'>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <Pressable onPress={() => navigation.navigate('Home')}>
             <XIcon color={'white'} size={30} />
-          </TouchableOpacity>
+          </Pressable>
           <Text className='font-light text-white text-lg'>Order help</Text>
         </View>
 

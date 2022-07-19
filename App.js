@@ -8,7 +8,6 @@ import BasketScreen from './screens/BasketScreen';
 import DeliveryScreen from './screens/DeliveryScreen';
 import PreparingOrderScreen from './screens/PreparingOrderScreen';
 import PickImage from './screens/examples/PickImage';
-import Menu from './screens/MenuScreen';
 import Camera from './screens/examples/Camera';
 import SwipableScreen from './screens/examples/SwipableScreen';
 import { store } from './store';
@@ -21,10 +20,6 @@ export default function App() {
       <Provider store={store}>
         <TailwindProvider>
           <Stack.Navigator>
-            <Stack.Screen
-              name='Menu'
-              component={Menu}
-            />
             <Stack.Screen name='Home' component={HomeScreen} />
             <Stack.Screen name='Restourant' component={RestourantScreen} />
             <Stack.Screen

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import { useNavigation } from '@react-navigation/native';
@@ -46,7 +46,7 @@ export default function CameraScreen() {
         <View className='flex-1'>
           <Image source={{ uri: image }} style={{ flex: 1 }} />
           {saved ? (
-            <TouchableOpacity
+            <Pressable
               onPress={navigation.goBack}
               className='z-20 absolute bottom-8 flex-row justify-center w-full'
             >
@@ -55,14 +55,14 @@ export default function CameraScreen() {
                   Saved succesfully, press to go back
                 </Text>
               </View>
-            </TouchableOpacity>
+            </Pressable>
           ) : (
-            <TouchableOpacity
+            <Pressable
               onPress={saveFile}
               className='z-20 absolute bottom-8  text-center w-full m-4 flex-row justify-center'
             >
               <Text style={styles.text}> Save File </Text>
-            </TouchableOpacity>
+            </Pressable>
           )}
         </View>
       ) : (
@@ -73,7 +73,7 @@ export default function CameraScreen() {
           type={type}
         >
           <View className='w-full absolute bottom-4 flex-row justify-between items-center mb-4'>
-            <TouchableOpacity
+            <Pressable
               style={styles.button}
               onPress={() => {
                 setType(
@@ -82,13 +82,13 @@ export default function CameraScreen() {
               }}
             >
               <Text style={styles.text}> Flip </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </Pressable>
+            <Pressable
               className='w-20 h-20 rounded-full bg-white'
               onPress={__takePicture}
             />
-            <TouchableOpacity style={styles.button}>
-            </TouchableOpacity>
+            <Pressable style={styles.button}>
+            </Pressable>
           </View>
         </Camera>
       )}

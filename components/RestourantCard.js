@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Pressable, Image } from 'react-native';
 import React from 'react';
 import { LocationMarkerIcon, StarIcon } from 'react-native-heroicons/outline';
 import { urlFor } from '../sanity';
@@ -19,7 +19,7 @@ const RestourantCard = ({
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={() => {
         navigation.navigate('Restourant', {
           id,
@@ -56,7 +56,7 @@ const RestourantCard = ({
           <Text className='text-gray-500 text-xs'>Neaby: {address} </Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

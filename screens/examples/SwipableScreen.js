@@ -4,7 +4,7 @@ import {
   Text,
   FlatList,
   Animated,
-  TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import React, { useState } from 'react';
 import { Swipeable } from 'react-native-gesture-handler';
@@ -51,17 +51,16 @@ const RightActions = ({ progress, dragX, onPress, id }) => {
     extrapolate: 'clamp',
   });
   return (
-    <TouchableOpacity
-      className='h-full justify-center'
-      onPress={() => onPress(id)}
-    >
-      <View
-        
-        className='bg-[red] justify-center items-end'
-      >
-        <Animated.Text style={{ transform: [{ scale }] }} className='text-white p-7'>Delete</Animated.Text>
+    <Pressable className='h-full justify-center' onPress={() => onPress(id)}>
+      <View className='bg-[red] justify-center items-end'>
+        <Animated.Text
+          style={{ transform: [{ scale }] }}
+          className='text-white p-7'
+        >
+          Delete
+        </Animated.Text>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

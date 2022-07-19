@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useEffect, useLayoutEffect } from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, Pressable, View } from 'react-native';
 import {
   ArrowLeftIcon,
   ChevronRightIcon,
@@ -68,12 +68,12 @@ const dispatch = useDispatch()
           />
         </View>
 
-        <TouchableOpacity
+        <Pressable
           className='absolute top-10 left-5 p-2 bg-gray-300 rounded-full'
           onPress={navigation.goBack}
         >
           <ArrowLeftIcon color={'#00ccbb'} size={20} />
-        </TouchableOpacity>
+        </Pressable>
         <View className='bg-white'>
           <View className='px-4 pt-4'>
             <Text className='text-3xl font-bold'>{title}</Text>
@@ -97,13 +97,13 @@ const dispatch = useDispatch()
             <Text className='text-gray-500 mt-2 pb-4'>{short_description}</Text>
           </View>
 
-          <TouchableOpacity className='flex-row  items-center space-x-2 p-4 border-y border-gray-300'>
+          <Pressable className='flex-row  items-center space-x-2 p-4 border-y border-gray-300'>
             <QuestionMarkCircleIcon color={'gray'} opacity={0.6} size={20} />
             <Text className='font-bold text-md pl-2 flex-1'>
               Have a food alergy?
             </Text>
             <ChevronRightIcon color='#00CCBB' />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         <View className='pb-36'>
