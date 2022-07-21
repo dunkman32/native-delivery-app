@@ -30,6 +30,12 @@ const Menu = ({navigation}) => {
         >
           <Text>SwipableScreen</Text>
         </Pressable>
+        <Pressable
+          className='p-4 m-2 border-[#00ccbb] border-2	rounded-lg active:border-[#8b00cc]'
+          onPress={() => navigation.navigate('Iframe')}
+        >
+          <Text>Iframe</Text>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
